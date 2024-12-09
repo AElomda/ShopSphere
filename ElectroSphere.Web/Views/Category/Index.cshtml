@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<Category>
 
 <h3>Categories List</h3>
-
+<a class="btn btn-primary" href="/Category/Create">Create</a>
+<br />
 <table class="table table-hover" width="100%">
     <tr>
         <td>Name</td>
@@ -14,6 +15,10 @@
             <td>@item.Name</td>
             <td>@item.Description</td>
             <td>@item.CreatedTime</td>
+            <td>
+                <a class="btn btn-success" href="/Category/Edit/@item.Id">Edit</a>
+                <a class="btn btn-danger" href="/Category/Delete/@item.Id">Delete</a>
+            </td>
         </tr>
     }
 </table>
