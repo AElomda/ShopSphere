@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectroSphere.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241209175112_InitialCreate")]
+    [Migration("20241209184417_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
