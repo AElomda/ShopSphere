@@ -30,6 +30,7 @@ namespace ElectroSphere.Web.Controllers
             {
                 _context.Categories.Add(category);
                 _context.SaveChanges();
+                TempData["Create"] = "Data Has Created Succsesfully";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -52,6 +53,7 @@ namespace ElectroSphere.Web.Controllers
             {
                 _context.Categories.Update(category);
                 _context.SaveChanges();
+                TempData["Update"] = "Data Has Updated Succsesfully";
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -77,6 +79,7 @@ namespace ElectroSphere.Web.Controllers
             }
             _context.Categories.Remove(categoryIndb);
             _context.SaveChanges();
+            TempData["Delete"] = "Data Has Deleted Succsesfully";
             return RedirectToAction("Index");
         }
     }

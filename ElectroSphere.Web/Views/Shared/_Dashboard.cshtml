@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/css/adminlte.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
+
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -267,6 +269,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <partial name="_Toster" />
                         @RenderBody()
                     </div>
                 </div>
