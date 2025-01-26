@@ -27,7 +27,7 @@
 
 ## Tech Stack  
 
-- **Frontend:** HTML5, CSS3, Bootstrap  
+- **Frontend:** HTML5, CSS3, Bootstrap, JavaScript
 - **Backend:** ASP.NET MVC, C#  
 - **Database:** Microsoft SQL Server  
 - **Version Control:** Git, GitHub  
