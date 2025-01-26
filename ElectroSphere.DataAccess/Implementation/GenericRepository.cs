@@ -23,7 +23,7 @@ namespace ElectroSphere.DataAccess.Implementation
             _dbset.Add(entity);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> perdicate, string? Includeword)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? perdicate=null, string? Includeword= null)
         {
             IQueryable<T> query = _dbset;
             if(perdicate != null)
@@ -40,7 +40,7 @@ namespace ElectroSphere.DataAccess.Implementation
             return query.ToList();  
         }
 
-        public T GetFirstorDefault(Expression<Func<T, bool>> perdicate, string? Includeword)
+        public T GetFirstorDefault(Expression<Func<T, bool>>? perdicate = null, string? Includeword = null)
         {
             IQueryable<T> query = _dbset;
             if (perdicate != null)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ElectroSphere.DataAccess;
 using ElectroSphere.Entities.Models;
+using ElectroSphere.Entities.Repositories;
 
 
 
@@ -8,14 +9,14 @@ namespace ElectroSphere.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public CategoryController(ApplicationDbContext context)
+        private IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            var categories = _context.Categories.ToList();
+            var categories = _unitOfWork.Category.GetAll();
             return View(categories);
         }
 
@@ -30,8 +31,10 @@ namespace ElectroSphere.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+                //_context.Categories.Add(category);
+                _unitOfWork.Category.Add(category);
+                //_context.SaveChanges();
+                _unitOfWork.Complete();     
                 TempData["Create"] = "Data Has Created Succsesfully";
                 return RedirectToAction("Index");
             }
@@ -44,7 +47,7 @@ namespace ElectroSphere.Web.Controllers
             {
                 NotFound();
             }
-            var categoryIndb = _context.Categories.Find(id);
+            var categoryIndb = _unitOfWork.Category.GetFirstorDefault(x => x.Id == id);
             return View(categoryIndb);
         }
         [HttpPost]
@@ -53,8 +56,10 @@ namespace ElectroSphere.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(category);
-                _context.SaveChanges();
+                //_context.Categories.Update(category);
+                _unitOfWork.Category.Update(category);
+                // _context.SaveChanges();
+                _unitOfWork.Complete();
                 TempData["Update"] = "Data Has Updated Succsesfully";
                 return RedirectToAction("Index");
             }
@@ -67,20 +72,22 @@ namespace ElectroSphere.Web.Controllers
             {
                 NotFound();
             }
-            var categoryIndb = _context.Categories.Find(id);
+            var categoryIndb = _unitOfWork.Category.GetFirstorDefault(x => x.Id == id);
             return View(categoryIndb);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteCategory(int? id)
         {
-            var categoryIndb = _context.Categories.Find(id);
-            if(categoryIndb == null)
+            var categoryIndb = _unitOfWork.Category.GetFirstorDefault(x => x.Id == id);
+            if (categoryIndb == null)
             {
                 NotFound();
             }
-            _context.Categories.Remove(categoryIndb);
-            _context.SaveChanges();
+            //_context.Categories.Remove(categoryIndb);
+            _unitOfWork.Category.Remove(categoryIndb);
+            //_context.SaveChanges();
+            _unitOfWork.Complete();
             TempData["Delete"] = "Data Has Deleted Succsesfully";
             return RedirectToAction("Index");
         }

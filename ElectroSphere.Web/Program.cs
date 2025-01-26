@@ -1,4 +1,5 @@
 using ElectroSphere.DataAccess;
+using ElectroSphere.Entities.Repositories;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -11,6 +12,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")    
     ));
+builder.Services.AddScoped<IUnitOfWork, IUnitOfWork>();
 
 var app = builder.Build();
 
