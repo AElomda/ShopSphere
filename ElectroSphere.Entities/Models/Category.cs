@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ElectroSphere.Web.Models
+namespace ElectroSphere.Entities.Models
 {
     public class Category
     {

@@ -1,4 +1,4 @@
-using ElectroSphere.Web.Data;
+using ElectroSphere.DataAccess;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

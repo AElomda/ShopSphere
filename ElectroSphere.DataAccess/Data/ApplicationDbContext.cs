@@ -1,7 +1,7 @@
-﻿    using ElectroSphere.Web.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ElectroSphere.Entities.Models;
 
-namespace ElectroSphere.Web.Data
+namespace ElectroSphere.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

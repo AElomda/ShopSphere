@@ -1,4 +1,4 @@
-using ElectroSphere.Web.Models;
+using ElectroSphere.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

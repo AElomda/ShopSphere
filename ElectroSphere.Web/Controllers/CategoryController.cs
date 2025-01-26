@@ -1,6 +1,8 @@
-﻿using ElectroSphere.Web.Data;
-using ElectroSphere.Web.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ElectroSphere.DataAccess;
+using ElectroSphere.Entities.Models;
+
+
 
 namespace ElectroSphere.Web.Controllers
 {

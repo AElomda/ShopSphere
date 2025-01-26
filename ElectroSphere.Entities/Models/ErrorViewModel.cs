@@ -1,4 +1,4 @@
-namespace ElectroSphere.Web.Models
+namespace ElectroSphere.Entities.Models
 {
     public class ErrorViewModel
     {
