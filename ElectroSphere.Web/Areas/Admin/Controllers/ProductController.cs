@@ -12,10 +12,12 @@ namespace ElectroSphere.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductController : Controller
     {
-        private IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -39,18 +41,28 @@ namespace ElectroSphere.Web.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductVM productVM, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                //_context.Categories.Add(producr);
-                _unitOfWork.Product.Add(product);
-                //_context.SaveChanges();
+                string RootPath = _webHostEnvironment.WebRootPath;
+                if(file != null)
+                {
+                    string filename = Guid.NewGuid().ToString();
+                    var upload = Path.Combine(RootPath, @"Images\Product");
+                    var ext = Path.GetExtension(file.FileName);
+                    using (var filestream = new FileStream(Path.Combine(upload, filename + ext), FileMode.Create))
+                    {
+                        file.CopyTo(filestream);
+                    }
+                    productVM.Product.Img = @"Images\Products\" + filename + ext;
+                }
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Complete();
                 TempData["Create"] = "Data Has Created Succsesfully";
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(productVM.Product);
         }
         [HttpGet]
         public IActionResult Edit(int? id)
