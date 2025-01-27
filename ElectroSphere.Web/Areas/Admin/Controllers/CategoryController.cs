@@ -5,8 +5,9 @@ using ElectroSphere.Entities.Repositories;
 
 
 
-namespace ElectroSphere.Web.Controllers
+namespace ElectroSphere.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private IUnitOfWork _unitOfWork;
@@ -34,7 +35,7 @@ namespace ElectroSphere.Web.Controllers
                 //_context.Categories.Add(category);
                 _unitOfWork.Category.Add(category);
                 //_context.SaveChanges();
-                _unitOfWork.Complete();     
+                _unitOfWork.Complete();
                 TempData["Create"] = "Data Has Created Succsesfully";
                 return RedirectToAction("Index");
             }
@@ -43,7 +44,7 @@ namespace ElectroSphere.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if(id == null | id == 0)
+            if (id == null | id == 0)
             {
                 NotFound();
             }
